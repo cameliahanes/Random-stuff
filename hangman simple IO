@@ -1,0 +1,32 @@
+import getpass
+#Todo: ASCII art for the 7 hangman stages
+HANGMAN = ["0","1","2","3","4","5","6"]
+
+
+#If running in IDLE or any other IDE change "getpass.getpass" to input
+WORD = list(input("Please input a word to play with!"))
+DISPLAY = []
+GUESSED = []
+DISPLAY = ["?"] * len(WORD)
+
+guesses = 0
+while guesses < 7:
+    print("Word to guess:", DISPLAY)
+    print(HANGMAN[guesses])
+    print("Wrongly gussed letters:",GUESSED)
+    if WORD == DISPLAY:
+        print("You won, congratzzzzz!")
+        break
+    char = input("Please guess a char!")
+    if WORD.__contains__(char):
+        for check, num in zip(WORD,range(len(WORD))):
+            if check == char:
+                DISPLAY[num] = char
+    else:
+        if GUESSED.__contains__(char):
+            print("You already tried that one!")
+        else:
+            guesses += 1
+            GUESSED.append(char)
+else:
+    print("You lost misearbly!!\nThe word was: ", WORD)
